@@ -13,6 +13,7 @@ import savogineros.Gestioneprenotazioni.services.UtentiService;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 @Component
 public class Runner implements CommandLineRunner {
@@ -30,16 +31,22 @@ public class Runner implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         Faker faker = new Faker(Locale.ITALIAN);
+        Random rndm = new Random();
 
-        //Edificio edificio1 = new Edificio(faker.company().name(), faker.address().streetAddress(), faker.country().name());
-        //edificiService.save(edificio1);
+        for (int i =0; i < 5; i++) {
 
-        //Utente utenteLocale = new Utente(faker.funnyName().name(),faker.harryPotter().character(),faker.name().lastName(),faker.internet().emailAddress());
-        //utentiService.save(utenteLocale);
+            //Edificio edificio1 = new Edificio(faker.company().name(), faker.address().streetAddress(), faker.country().name());
+            //edificiService.save(edificio1);
 
-        //Postazione postazione1 = new Postazione(faker.chuckNorris().fact(), WorkStationType.SALA_RIUNIONI,14, edificiService.findById(2));
-        //System.out.println(postazione1);
-        //postazioniService.save(postazione1);
+            //Utente utenteLocale = new Utente(faker.funnyName().name(),faker.harryPotter().character(),faker.name().lastName(),faker.internet().emailAddress());
+            //utentiService.save(utenteLocale);
+        }
+
+        Postazione postazione1 = new Postazione(faker.chuckNorris().fact(), WorkStationType.SALA_RIUNIONI,14, edificiService.findById(103));
+        System.out.println(postazione1);
+        postazioniService.save(postazione1);
+
+
 
         /*try {
             Utente utente1 = utentiService.findById(1);
