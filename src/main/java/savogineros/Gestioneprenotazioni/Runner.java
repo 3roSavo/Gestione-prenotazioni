@@ -42,9 +42,13 @@ public class Runner implements CommandLineRunner {
             //utentiService.save(utenteLocale);
         }
 
-        Postazione postazione1 = new Postazione(faker.chuckNorris().fact(), WorkStationType.SALA_RIUNIONI,14, edificiService.findById(103));
-        System.out.println(postazione1);
-        postazioniService.save(postazione1);
+        //Postazione postazione1 = new Postazione(faker.chuckNorris().fact(), WorkStationType.OPENSPACE,8, edificiService.findById(152));
+        //postazioniService.save(postazione1);
+
+
+        System.out.println(edificiService.findById(156));
+        System.out.println(postazioniService.findById(352));
+        System.out.println(utentiService.findById(104));
 
 
 

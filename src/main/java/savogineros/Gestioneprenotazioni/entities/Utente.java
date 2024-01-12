@@ -1,9 +1,6 @@
 package savogineros.Gestioneprenotazioni.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -23,7 +20,7 @@ public class Utente {
     private String firstName;
     private String lastName;
     private String email;
-    @OneToMany(mappedBy = "utente")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "utente")
     private List<Prenotazione> listaPrenotazioni;
 
 

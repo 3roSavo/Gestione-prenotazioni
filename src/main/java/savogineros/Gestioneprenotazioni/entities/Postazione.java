@@ -21,11 +21,12 @@ public class Postazione {
 
     private String description;
 
+    @Enumerated(EnumType.STRING)
     private WorkStationType workStationType;
 
     private int maxOccupancy;
 
-    @OneToMany(mappedBy = "postazione")
+    @OneToMany( fetch = FetchType.EAGER, mappedBy = "postazione")
     private List<Prenotazione> listaPrenotazioni;
 
     @ManyToOne
