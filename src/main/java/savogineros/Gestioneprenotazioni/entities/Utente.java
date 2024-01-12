@@ -24,7 +24,7 @@ public class Utente {
     private String lastName;
     private String email;
     @OneToMany(mappedBy = "utente")
-    private List<Prenotazione> listaPrenotazioni = new ArrayList<>();
+    private List<Prenotazione> listaPrenotazioni;
 
 
     // 2° COSTRUTTORE PER NON INCLUDERE L'ID

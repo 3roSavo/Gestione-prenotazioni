@@ -18,11 +18,15 @@ public class Postazione {
     @GeneratedValue
     @Setter(AccessLevel.NONE)
     private long id;
+
     private String description;
+
     private WorkStationType workStationType;
+
     private int maxOccupancy;
+
     @OneToMany(mappedBy = "postazione")
-    private List<Prenotazione> listaPrenotazioni = new ArrayList<>();
+    private List<Prenotazione> listaPrenotazioni;
 
     @ManyToOne
     @JoinColumn(name = "edificio_id", nullable = false)
