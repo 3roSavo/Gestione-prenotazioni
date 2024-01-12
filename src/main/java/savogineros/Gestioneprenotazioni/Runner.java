@@ -34,14 +34,14 @@ public class Runner implements CommandLineRunner {
         //Edificio edificio1 = new Edificio(faker.company().name(), faker.address().streetAddress(), faker.country().name());
         //edificiService.save(edificio1);
 
-        //Utente utente1 = new Utente(faker.funnyName().name(),faker.harryPotter().character(),faker.name().lastName(),faker.internet().emailAddress());
+        //Utente utenteLocale = new Utente(faker.funnyName().name(),faker.harryPotter().character(),faker.name().lastName(),faker.internet().emailAddress());
+        //utentiService.save(utenteLocale);
 
-
-        //utentiService.save(utente1);
         //Postazione postazione1 = new Postazione(faker.chuckNorris().fact(), WorkStationType.SALA_RIUNIONI,14, edificiService.findById(2));
+        //System.out.println(postazione1);
         //postazioniService.save(postazione1);
 
-        try {
+        /*try {
             Utente utente1 = utentiService.findById(1);
             System.out.println(utente1);
 
@@ -50,7 +50,7 @@ public class Runner implements CommandLineRunner {
 
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
-        }
+        }*/
         //Prenotazione prenotazione1 = new Prenotazione(utente1,postazione1,LocalDate.parse("2023-06-12"));
         //prenotazioniService.save(prenotazione1);
 
