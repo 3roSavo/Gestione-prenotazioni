@@ -23,7 +23,7 @@ public class EdificiService {
         if (edificioOptional.isPresent()) {
             return edificioOptional.get();
         } else {
-            throw new RuntimeException("Utente con id " + id + " non presente");
+            throw new RuntimeException("Edificio con id " + id + " non presente");
         }
     }
 

@@ -27,7 +27,7 @@ public class PostazioniService {
         if (postazioneOptional.isPresent()) {
             return postazioneOptional.get();
         } else {
-            throw new RuntimeException("Utente con id " + id + " non presente");
+            throw new RuntimeException("Postazione con id " + id + " non presente");
         }
     }
 

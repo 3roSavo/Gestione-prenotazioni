@@ -46,11 +46,12 @@ public class Runner implements CommandLineRunner {
         //postazioniService.save(postazione1);
 
 
-        System.out.println(edificiService.findById(156));
-        System.out.println(postazioniService.findById(352));
-        System.out.println(utentiService.findById(104));
+        Edificio edificioRandom = edificiService.findById(156);
+        Postazione postazioneRandom = postazioniService.findById(402);
+        Utente utenteRandom = utentiService.findById(106);
 
-
+        Prenotazione prenotazione1 = new Prenotazione(utenteRandom,postazioneRandom,LocalDate.parse("2023-01-29"));
+        prenotazioniService.save(prenotazione1);
 
         /*try {
             Utente utente1 = utentiService.findById(1);
@@ -62,8 +63,7 @@ public class Runner implements CommandLineRunner {
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
         }*/
-        //Prenotazione prenotazione1 = new Prenotazione(utente1,postazione1,LocalDate.parse("2023-06-12"));
-        //prenotazioniService.save(prenotazione1);
+
 
 
 

@@ -11,7 +11,6 @@ import savogineros.Gestioneprenotazioni.repositories.PrenotazioniDAO;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 @Service
@@ -21,10 +20,18 @@ public class PrenotazioniService {
 
     public void save(Prenotazione prenotazione) {
 
+        Postazione numeroPostazione = prenotazione.getPostazione();
+
         LocalDate dataPrenotazione = prenotazione.getDate();
-        List<LocalDate> listaDatePrenotazione = prenotazione.getPostazione().getListaPrenotazioni().stream().map(prenotazione1 -> prenotazione1.getDate()).toList();
-        if (listaDatePrenotazione.stream().anyMatch(data -> data.equals(dataPrenotazione))) {
-            throw new RuntimeException("Giorno già prenotato... riprova");
+        List<LocalDate> listaDatePrenotazioniPostazione = prenotazione.getPostazione().getListaPrenotazioni().stream().map(prenotazione1 -> prenotazione1.getDate()).toList();
+        List<LocalDate> listaDatePrenotazioniUtente = prenotazione.getUtente().getListaPrenotazioni().stream().map(prenotazione2 -> prenotazione2.getDate()).toList();
+
+        if (listaDatePrenotazioniPostazione.stream().anyMatch(data -> data.equals(dataPrenotazione))) {
+            // Controllo che verifica che non ci siano già prenotazioni della postazione per quel giorno dato (dataPrenotazione)
+            throw new RuntimeException("Postazione già occupata per quel giorno! Riprova!");
+        } else if (listaDatePrenotazioniUtente.stream().anyMatch(localDate -> localDate.equals(dataPrenotazione)) ){
+            // Controllo che verifica che l'utente non abbia già prenotato un'altra postazione per quel giorno dato (dataPrenotazione)
+            throw new RuntimeException("Hai già una prenotazione per quel giorno! Riprova!");
         } else {
             prenotazioniDAO.save(prenotazione);
             System.out.println("Prenotazione salvata correttamente");
@@ -36,7 +43,7 @@ public class PrenotazioniService {
         if (prenotazioneOptional.isPresent()) {
             return prenotazioneOptional.get();
         } else {
-            throw new RuntimeException("Utente con id " + id + " non presente");
+            throw new RuntimeException("Prenotazione con id " + id + " non presente");
         }
     }
 
