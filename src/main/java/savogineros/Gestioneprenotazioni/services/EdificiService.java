@@ -14,7 +14,7 @@ public class EdificiService {
     @Autowired
     EdificiDAO edificiDAO;
 
-    public void save(Edificio edificio) {
+    public void saveEdificio(Edificio edificio) {
         edificiDAO.save(edificio);
         System.out.println("Edificio salvato correttamente!");
     }
@@ -34,8 +34,24 @@ public class EdificiService {
         System.out.println("Edificio eliminato correttamente!");
     }
 
+    public void findByIdAndUpdate(long id, Edificio edificio) {
+        Edificio edificioTrovato = findById(id);
+        String nameEdificioTrovato = edificioTrovato.getName();
+        edificioTrovato.setName(edificio.getName());
+        edificioTrovato.setAddress(edificio.getAddress());
+        edificioTrovato.setCity(edificio.getCity());
+        saveEdificio(edificioTrovato);
+        System.out.println("Edificio con id " + id + " di nome " + nameEdificioTrovato + " modificato correttamente con l'edificio " + edificio.getName());
+        // CONSIDERAZIONI METODO
+        // Abbiamo quindi notato che la save() eseguita su un edificio con id già presente nel database semplicemente aggiorna i dati per quell'edificio
+    }
+
     public List<Edificio> findAllEdifici() {
         return edificiDAO.findAll();
+    }
+
+    public long countEdifici() {
+        return edificiDAO.count();
     }
 
 

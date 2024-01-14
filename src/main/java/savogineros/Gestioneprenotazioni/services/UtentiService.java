@@ -14,7 +14,7 @@ public class UtentiService {
     @Autowired
     private UtentiDAO utentiDAO;
 
-    public void save(Utente utente) {
+    public void saveUtente(Utente utente) {
         utentiDAO.save(utente);
         System.out.println("Utente salvato correttamente!");
     }
@@ -34,8 +34,25 @@ public class UtentiService {
         System.out.println("Utente eliminato correttamente!");
     }
 
+    public void findByIdAndUpdate(long id, Utente utente) {
+        Utente utenteTrovato = findById(id);
+        String firstNameUtenteTrovato = utenteTrovato.getFirstName();
+        utenteTrovato.setUserName(utente.getUserName());
+        utenteTrovato.setFirstName(utente.getFirstName());
+        utenteTrovato.setLastName(utente.getLastName());
+        utenteTrovato.setEmail(utente.getEmail());
+        saveUtente(utenteTrovato);
+        System.out.println("Utente con id " + id + " di nome " + firstNameUtenteTrovato + " modificato correttamente con l'utente " + utente.getFirstName());
+        // CONSIDERAZIONI METODO
+        // Abbiamo quindi notato che la save() eseguita su un utente con id già presente nel database semplicemente aggiorna i dati per quell'utente
+    }
+
     public List<Utente> findAllUtenti() {
         return utentiDAO.findAll();
+    }
+
+    public long countUtenti() {
+        return utentiDAO.count();
     }
 
 }

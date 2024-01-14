@@ -17,7 +17,7 @@ public class PostazioniService {
     @Autowired
     private PostazioniDAO postazioniDAO;
 
-    public void save(Postazione postazione) {
+    public void savePostazione(Postazione postazione) {
         postazioniDAO.save(postazione);
         System.out.println("Postazione salvata correttamente!");
     }
@@ -37,8 +37,25 @@ public class PostazioniService {
         System.out.println("Postazione eliminata correttamente!");
     }
 
+    public void findByIdAndUpdate(long id, Postazione postazione) {
+        Postazione postazioneTrovata = findById(id);
+        String descrizionePostazioneTrovata = postazioneTrovata.getDescription();
+        postazioneTrovata.setDescription(postazione.getDescription());
+        postazioneTrovata.setWorkStationType(postazione.getWorkStationType());
+        postazioneTrovata.setMaxOccupancy(postazione.getMaxOccupancy());
+        postazioneTrovata.setEdificio(postazione.getEdificio());
+        savePostazione(postazioneTrovata);
+        System.out.println("Postazione con id " + id + " con descrizione: " + descrizionePostazioneTrovata + ", modificata correttamente con la postazione con la descrizione " + postazioneTrovata.getDescription());
+        // CONSIDERAZIONI METODO
+        // Abbiamo quindi notato che la save() eseguita su una postazione con id già presente nel database semplicemente aggiorna i dati per quella postazione
+    }
+
     public List<Postazione> findAllPostazioni() {
         return postazioniDAO.findAll();
+    }
+
+    public long countPostazioni() {
+        return postazioniDAO.count();
     }
 
 

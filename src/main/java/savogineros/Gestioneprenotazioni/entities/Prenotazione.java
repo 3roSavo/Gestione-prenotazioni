@@ -15,12 +15,15 @@ public class Prenotazione {
     @GeneratedValue
     @Setter(AccessLevel.NONE)
     private long id;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false) // ogni prenotazione DEVE avere uno user collegato
     private Utente utente;
+
     @ManyToOne
     @JoinColumn(name = "postazione_id", nullable = false)
     private Postazione postazione;
+
     private LocalDate date;
 
     // 2° COSTRUTTORE PER NON INCLUDERE L'ID

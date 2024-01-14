@@ -18,7 +18,7 @@ public class PrenotazioniService {
     @Autowired
     private PrenotazioniDAO prenotazioniDAO;
 
-    public void save(Prenotazione prenotazione) {
+    public void savePrenotazione(Prenotazione prenotazione) {
 
         Postazione numeroPostazione = prenotazione.getPostazione();
 
@@ -47,10 +47,28 @@ public class PrenotazioniService {
         }
     }
 
+    public void findByIdAndUpdate(long id, Prenotazione prenotazione) {
+        Prenotazione prenotazioneTrovata = findById(id);
+        LocalDate dataPrenotazioneTrovata = prenotazioneTrovata.getDate();
+
+        prenotazioneTrovata.setUtente(prenotazione.getUtente());
+        prenotazioneTrovata.setPostazione(prenotazione.getPostazione());
+        prenotazioneTrovata.setDate(prenotazione.getDate());
+
+        savePrenotazione(prenotazioneTrovata);
+        System.out.println("Prenotazione con id " + id + " per la data " + dataPrenotazioneTrovata + " modificata correttamente con la data " + prenotazioneTrovata.getDate());
+        // CONSIDERAZIONI METODO
+        // Abbiamo quindi notato che la save() eseguita su una prenotazione con id già presente nel database semplicemente aggiorna i dati per quella prenotazione
+    }
+
     public void findByIdAndDelete(long id) {
         Prenotazione prenotazione = this.findById(id);
         prenotazioniDAO.delete(prenotazione);
         System.out.println("Prenotazione eliminata correttamente!");
+    }
+
+    public long countPrenotazioni() {
+        return prenotazioniDAO.count();
     }
 
 

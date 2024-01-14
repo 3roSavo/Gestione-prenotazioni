@@ -30,20 +30,38 @@ public class Runner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        try {
+
             // Inizializziamo il DATABASE!
             //randomUsers();
             //randomEdifici();
             //randomPostazioni();
             //randomPrenotazioni();
-            //Prenotazione prenotazione = new Prenotazione(utentiService.findById(1),postazioniService.findById(3),LocalDate.parse("2020-03-31"));
-            //prenotazioniService.save(prenotazione);
+
+            try {
+                // PROVE METODO findByIdAndUpdate()
+                Utente utente = new Utente("Genoveffa4ever", "Genoveffa", "Caltarani", "gevo.star@gmail.com");
+                //utentiService.findByIdAndUpdate(4,utente);
+
+                Edificio edificio = new Edificio("Empire State Building", "via dei matti, 0", "Potenza");
+                //edificiService.findByIdAndUpdate(8,edificio);
+
+                //Postazione postazione = new Postazione("postazione carina situata vicino alla segretaria carina", WorkStationType.OPENSPACE,3, edificiService.findById(3));
+                //postazioniService.findByIdAndUpdate(6,postazione);
+
+                Prenotazione prenotazione = new Prenotazione(utentiService.findById(6), postazioniService.findById(4), LocalDate.of(2021, 7, 12));
+                //prenotazioniService.findByIdAndUpdate(54,prenotazione);
+            } catch (Exception exception) {
+                System.err.println(exception.getMessage());
+            }
+
+            // Conteggio elementi per tabella/classe nel DB
+            System.out.println(prenotazioniService.countPrenotazioni());
+            System.out.println(utentiService.countUtenti());
+            System.out.println(postazioniService.countPostazioni());
+            System.out.println(edificiService.countEdifici());
 
 
 
-        } catch (Exception exception) {
-            System.err.println(exception.getMessage());
-        }
     }
 
 
@@ -65,7 +83,7 @@ public class Runner implements CommandLineRunner {
             String randomLastName = faker.name().lastName();
             String randomEmail = faker.internet().emailAddress();
             Utente utente = new Utente(randomUserName, randomFirstName, randomLastName, randomEmail);
-            utentiService.save(utente);
+            utentiService.saveUtente(utente);
         }
     }
     public void randomEdifici() {
@@ -75,7 +93,7 @@ public class Runner implements CommandLineRunner {
             String randomAddress = faker.address().streetAddress();
             String randomCity = faker.address().city();
             Edificio edificio = new Edificio(randomName, randomAddress, randomCity);
-            edificiService.save(edificio);
+            edificiService.saveEdificio(edificio);
         }
     }
     public void randomPostazioni() {
@@ -115,7 +133,7 @@ public class Runner implements CommandLineRunner {
             Edificio randomEdificio = listaEdifici.get(0);
 
             Postazione postazione = new Postazione(randomDescription, randomWorkstationType, randomMaxOccupancy, randomEdificio);
-            postazioniService.save(postazione);
+            postazioniService.savePostazione(postazione);
         }
     }
 
@@ -133,7 +151,7 @@ public class Runner implements CommandLineRunner {
             int indiceRandomListaPostazioni = rndm.nextInt(0, listaPostazioni.size());
 
             Prenotazione prenotazione = new Prenotazione(listaUtenti.get(indiceRandomListaUtenti), listaPostazioni.get(indiceRandomListaPostazioni), dataRandom());
-            prenotazioniService.save(prenotazione);
+            prenotazioniService.savePrenotazione(prenotazione);
         }
     }
 }
