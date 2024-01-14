@@ -37,6 +37,10 @@ public class PostazioniService {
         System.out.println("Postazione eliminata correttamente!");
     }
 
+    public List<Postazione> findAllPostazioni() {
+        return postazioniDAO.findAll();
+    }
+
 
 
 

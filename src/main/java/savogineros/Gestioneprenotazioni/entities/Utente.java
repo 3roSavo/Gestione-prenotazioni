@@ -16,10 +16,15 @@ public class Utente {
     @GeneratedValue
     @Setter(AccessLevel.NONE)
     private long id;
+
     private String userName;
+
     private String firstName;
+
     private String lastName;
+
     private String email;
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "utente")
     private List<Prenotazione> listaPrenotazioni;
 

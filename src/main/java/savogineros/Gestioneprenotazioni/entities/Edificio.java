@@ -19,9 +19,13 @@ public class Edificio {
     @GeneratedValue
     @Setter(AccessLevel.NONE)
     private long id;
+
     private String name;
+
     private String address;
+
     private String city;
+
     @OneToMany(mappedBy = "edificio")
     private List<Postazione> listaPostazioni = new ArrayList<>();
 

@@ -6,6 +6,7 @@ import savogineros.Gestioneprenotazioni.entities.Edificio;
 import savogineros.Gestioneprenotazioni.entities.Utente;
 import savogineros.Gestioneprenotazioni.repositories.EdificiDAO;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,6 +32,10 @@ public class EdificiService {
         Edificio edificio = this.findById(id);
         edificiDAO.delete(edificio);
         System.out.println("Edificio eliminato correttamente!");
+    }
+
+    public List<Edificio> findAllEdifici() {
+        return edificiDAO.findAll();
     }
 
 

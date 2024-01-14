@@ -6,6 +6,7 @@ import savogineros.Gestioneprenotazioni.entities.Edificio;
 import savogineros.Gestioneprenotazioni.entities.Utente;
 import savogineros.Gestioneprenotazioni.repositories.UtentiDAO;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,6 +32,10 @@ public class UtentiService {
         Utente utente = this.findById(id);
         utentiDAO.delete(utente);
         System.out.println("Utente eliminato correttamente!");
+    }
+
+    public List<Utente> findAllUtenti() {
+        return utentiDAO.findAll();
     }
 
 }
