@@ -55,4 +55,29 @@ public class UtentiService {
         return utentiDAO.count();
     }
 
+    // DERIVED QUERIES
+    // se torno una lista, essa può anche essere vuota, quindi non devo gestire exceptions
+    // mentre una findById() torna un optional dove il valore è presente o non è presente,
+    // quindi mi costringe a gestire la situazione con if/else o try/catch
+
+    public Optional<Utente> findByLastNameContaining(String partialLastName) {
+        return utentiDAO.findFirstByLastNameContainingIgnoreCase(partialLastName);
+    }
+
+    public List<Utente> filterByFirstName(String firstName) {
+        return utentiDAO.findByFirstNameIgnoreCase(firstName);
+    }
+    public List<Utente> filterByFirstNameAndLastName(String firstName, String lastName) {
+        return utentiDAO.findByFirstNameIgnoreCaseAndLastNameIgnoreCase(firstName, lastName);
+    }
+    public List<Utente> filterByFirstNameStartingWith(String partialFirstName) {
+        return utentiDAO.findByFirstNameStartingWithIgnoreCase(partialFirstName);
+    }
+    public List<Utente> filterByFirstNameList(List<String> firstNameList) {
+        return utentiDAO.findByFirstNameInIgnoreCase(firstNameList);
+    }
+    public List<Utente> filterByFirstNameNull() {
+        return utentiDAO.findByFirstNameNull();
+    }
+
 }

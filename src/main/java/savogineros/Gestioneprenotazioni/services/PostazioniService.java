@@ -58,6 +58,12 @@ public class PostazioniService {
         return postazioniDAO.count();
     }
 
+    // DERIVED QUERIES
+
+    public List<Postazione> filterByMaxOccupancyGreaterThan(int occupancy) {
+        return postazioniDAO.findByMaxOccupancyGreaterThan(occupancy);
+    }
+
 
 
 

@@ -10,7 +10,6 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Utente {
     @Id
     @GeneratedValue
@@ -37,5 +36,15 @@ public class Utente {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+    @Override // ho aggiunto il to string e levato il @ToString per personalizzarlo e levargli listaPrenotazioni perché creava eccezione stackOverflow
+    public String toString() {
+        return "Utente{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

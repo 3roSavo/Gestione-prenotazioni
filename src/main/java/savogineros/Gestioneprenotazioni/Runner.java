@@ -11,10 +11,7 @@ import savogineros.Gestioneprenotazioni.services.PrenotazioniService;
 import savogineros.Gestioneprenotazioni.services.UtentiService;
 
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
+import java.util.*;
 
 @Component
 public class Runner implements CommandLineRunner {
@@ -53,15 +50,38 @@ public class Runner implements CommandLineRunner {
             } catch (Exception exception) {
                 System.err.println(exception.getMessage());
             }
-
             // Conteggio elementi per tabella/classe nel DB
             System.out.println(prenotazioniService.countPrenotazioni());
             System.out.println(utentiService.countUtenti());
             System.out.println(postazioniService.countPostazioni());
             System.out.println(edificiService.countEdifici());
 
+            // DERIVED QUERIES
+            System.out.println("---------------findByFirstNameIgnoreCase-------------------");
+            utentiService.filterByFirstName("diamante").forEach(utente -> System.out.println(utente));
 
+            System.out.println("----------------findByFirstNameIgnoreCaseAndLastNameIgnoreCase-------------------");
+            utentiService.filterByFirstNameAndLastName("diamante", "porcospino").forEach(utente -> System.out.println(utente));
 
+            System.out.println("-----------------findByFirstNameStartingWithIgnoreCase---------------------");
+            utentiService.filterByFirstNameStartingWith("abb").forEach(utente -> System.out.println(utente));
+
+            System.out.println("-----------------findByFirstNameInIgnoreCase---------------------");
+            utentiService.filterByFirstNameList(List.of("diamante", "abella", "asdrubale")).forEach(utente -> System.out.println(utente));
+
+            System.out.println("-----------------findByFirstNameNull---------------------");
+            utentiService.filterByFirstNameNull().forEach(utente -> System.out.println(utente));
+
+        System.out.println("-----------------findByMaxOccupancy---------------------");
+        postazioniService.filterByMaxOccupancyGreaterThan(5).forEach(postazione -> System.out.println(postazione));
+
+        System.out.println("-----------------findByLastNameContainingIgnoreCase---------------------");
+        Optional<Utente> utenteOptional = utentiService.findByLastNameContaining("no");
+        if (utenteOptional.isPresent()) {
+            System.out.println(utenteOptional);
+        } else {
+            System.err.println("Non esiste nessun utente con quel cognome");
+        }
     }
 
 
@@ -120,7 +140,7 @@ public class Runner implements CommandLineRunner {
             }
 
             int randomMaxOccupancy = 1;
-            if (randomWorkstationType.equals(WorkStationType.PRIVATO)) {
+            if (randomWorkstationType.equals(WorkStationType.PRIVATO)) { // come si gestisce l'eccezione? boooh
                 randomMaxOccupancy = rndm.nextInt(1, 3);
             } else if (randomWorkstationType.equals(WorkStationType.OPENSPACE)) {
                 randomMaxOccupancy = rndm.nextInt(1, 5);
@@ -144,9 +164,9 @@ public class Runner implements CommandLineRunner {
         // Per quanto riguarda la data mi son già fatto la funzione più sopra
         // Prendiamo la seconda strada
         Random rndm = new Random();
+        List<Utente> listaUtenti = utentiService.findAllUtenti();
+        List<Postazione> listaPostazioni = postazioniService.findAllPostazioni();
         for (int i = 0; i< 10; i++) {
-            List<Utente> listaUtenti = utentiService.findAllUtenti();
-            List<Postazione> listaPostazioni = postazioniService.findAllPostazioni();
             int indiceRandomListaUtenti = rndm.nextInt(0, listaUtenti.size());
             int indiceRandomListaPostazioni = rndm.nextInt(0, listaPostazioni.size());
 
