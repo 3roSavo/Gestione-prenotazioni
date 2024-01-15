@@ -11,7 +11,9 @@ import java.util.Optional;
 public interface UtentiDAO extends JpaRepository<Utente, Long> {
 
     // FUNZIONALITA CUSTOM CON DERIVED QUERIES
-    // Qui ritornano tutte liste MA possono tornare anche valori singoli, in quel caso tornano OPTIONAL e dovrai gestirle
+
+    // Qui sotto abbiamo tutte queries che ritornano liste MA possono tornare anche valori singoli,
+    // in quel caso tornano OPTIONAL e dovrai gestire i singoli casi
     // ESEMPIO
     Optional<Utente> findFirstByLastNameContainingIgnoreCase(String partialLastName);
 
@@ -45,6 +47,9 @@ public interface UtentiDAO extends JpaRepository<Utente, Long> {
     List<Utente> findByFirstNameNull();
     // qui proviamo Null
 
+    boolean existsByUserName(String userName);
+    // qui proviamo existsBy, torna un booleano, se l'userName esiste -> True, altrimenti False
+    // lascerei la query senza IgnoreCase dato che lo userName dovrebbe essere case sensitive
 
 
 

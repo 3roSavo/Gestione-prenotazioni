@@ -60,7 +60,7 @@ public class UtentiService {
     // mentre una findById() torna un optional dove il valore è presente o non è presente,
     // quindi mi costringe a gestire la situazione con if/else o try/catch
 
-    public Optional<Utente> findByLastNameContaining(String partialLastName) {
+    public Optional<Utente> findFirstByLastNameContaining(String partialLastName) {
         return utentiDAO.findFirstByLastNameContainingIgnoreCase(partialLastName);
     }
 
@@ -78,6 +78,9 @@ public class UtentiService {
     }
     public List<Utente> filterByFirstNameNull() {
         return utentiDAO.findByFirstNameNull();
+    }
+    public boolean existsByUserName(String userName) {
+        return utentiDAO.existsByUserName(userName);
     }
 
 }

@@ -75,8 +75,8 @@ public class Runner implements CommandLineRunner {
         System.out.println("-----------------findByMaxOccupancy---------------------");
         postazioniService.filterByMaxOccupancyGreaterThan(5).forEach(postazione -> System.out.println(postazione));
 
-        System.out.println("-----------------findByLastNameContainingIgnoreCase---------------------");
-        Optional<Utente> utenteOptional = utentiService.findByLastNameContaining("no");
+        System.out.println("-----------------findFirstByLastNameContainingIgnoreCase---------------------");
+        Optional<Utente> utenteOptional = utentiService.findFirstByLastNameContaining("no");
         if (utenteOptional.isPresent()) {
             System.out.println(utenteOptional);
         } else {
@@ -87,6 +87,12 @@ public class Runner implements CommandLineRunner {
         postazioniService.findByWorkStationAndCity(WorkStationType.PRIVATO,"Sesto Donatella").forEach(postazione -> System.out.println(postazione));
         // ATTENZIONE! Se la city si trova su un'altra componente separata da Postazione basta inserire il nome della classe
         // prima del nome dell'attributo e JPA Repository lo troverà! (Edificio-City)
+
+        System.out.println("-----------------existsByUsername---------------------");
+        System.out.println(utentiService.existsByUserName("valdo.ferrara"));
+
+        System.out.println("-----------------JPQL = filterByMaxOccupancyGreaterThan3---------------------");
+        postazioniService.filterByMaxOccupancyGreaterThan3().forEach(postazione -> System.out.println(postazione));
     }
 
 

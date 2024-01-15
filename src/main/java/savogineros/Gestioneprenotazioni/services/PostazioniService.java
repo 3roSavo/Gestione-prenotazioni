@@ -70,6 +70,10 @@ public class PostazioniService {
     // prima del nome dell'attributo e JPA Repository lo troverà! (Edificio-City)
 
 
+    // Query in JPQL
+    public List<Postazione> filterByMaxOccupancyGreaterThan3() {
+        return postazioniDAO.filterByMaxOccupancyGreaterThan3();
+    }
 
 
 }
