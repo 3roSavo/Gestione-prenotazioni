@@ -23,5 +23,9 @@ public interface PostazioniDAO extends JpaRepository<Postazione,Long> {
     List<Postazione> findByWorkStationTypeAndEdificioCityIgnoreCase(WorkStationType workStationType, String city);
     // ATTENZIONE! Se la city si trova su un'altra componente separata da Postazione basta inserire il nome della classe
     // prima del nome dell'attributo e JPA Repository lo troverà! (Edificio-City)
+    // In JPQL sarebbe
+    //@Query("SELECT p FROM Postazione p JOIN p.edificio e WHERE p.workStationType = :workStationType AND LOWER(e.city) = LOWER(:city)")
+    //List<Postazione> trovaPerTipoPostazioneEEdificioCittàIgnoreCase(@Param("workStationType") WorkStationType workStationType, @Param("city") String city);
+
 
 }
