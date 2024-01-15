@@ -82,6 +82,11 @@ public class Runner implements CommandLineRunner {
         } else {
             System.err.println("Non esiste nessun utente con quel cognome");
         }
+
+        System.out.println("-----------------findByWorkStationTypeAndCityIgnoreCase---------------------");
+        postazioniService.findByWorkStationAndCity(WorkStationType.PRIVATO,"Sesto Donatella").forEach(postazione -> System.out.println(postazione));
+        // ATTENZIONE! Se la city si trova su un'altra componente separata da Postazione basta inserire il nome della classe
+        // prima del nome dell'attributo e JPA Repository lo troverà! (Edificio-City)
     }
 
 

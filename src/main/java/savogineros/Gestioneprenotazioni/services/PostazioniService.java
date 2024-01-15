@@ -2,12 +2,9 @@ package savogineros.Gestioneprenotazioni.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import savogineros.Gestioneprenotazioni.entities.Edificio;
 import savogineros.Gestioneprenotazioni.entities.Postazione;
-import savogineros.Gestioneprenotazioni.entities.Utente;
 import savogineros.Gestioneprenotazioni.entities.WorkStationType;
 import savogineros.Gestioneprenotazioni.repositories.PostazioniDAO;
-import savogineros.Gestioneprenotazioni.repositories.UtentiDAO;
 
 import java.util.List;
 import java.util.Optional;
@@ -64,6 +61,13 @@ public class PostazioniService {
         return postazioniDAO.findByMaxOccupancyGreaterThan(occupancy);
     }
 
+    // Richiesta esercizio: Un utente può ricercare le postazioni indicando il tipo di postazione desiderato
+    // e la città di interesse
+    public List<Postazione> findByWorkStationAndCity(WorkStationType workStationType, String city) {
+        return postazioniDAO.findByWorkStationTypeAndEdificioCityIgnoreCase(workStationType, city);
+    }
+    // ATTENZIONE! Se la city si trova su un'altra componente separata da Postazione basta inserire il nome della classe
+    // prima del nome dell'attributo e JPA Repository lo troverà! (Edificio-City)
 
 
 
